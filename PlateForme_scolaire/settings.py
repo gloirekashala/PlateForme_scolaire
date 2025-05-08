@@ -37,7 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'App_Inscription',  # Your app name here
+
+    'App_Inscription.apps.AppInscriptionConfig',  # Your app name here
+    'app_Directeur.apps.AppDirecteurConfig',  # Your app name here
+    'app_Paiement.apps.AppPaiementConfig',  # Your app name here
+    'app_Enseignant.apps.AppEnseignantConfig', # Your app name here
+    'app_Comptable.apps.AppComptableConfig'  # Your app name here
+    'app_Eleve.apps.AppEleveConfig',  # Your app name here
 ]
 
 MIDDLEWARE = [
@@ -55,7 +61,7 @@ ROOT_URLCONF = 'PlateForme_scolaire.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],  # Add your templates directory here
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -116,6 +122,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [BASE_DIR / 'static']  # Add your static files directory here
+#STATIC_ROOT = BASE_DIR / 'staticfiles'  # Directory to collect static files for production
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
