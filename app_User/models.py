@@ -1,3 +1,4 @@
+import random
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.contrib.auth.validators import UnicodeUsernameValidator
@@ -17,8 +18,8 @@ class User(AbstractUser):
     GENRE = [("M", "Masculin"), ("F", "Feminin")]
     username = models.CharField(
         max_length=150, 
-        validators=[UnicodeUsernameValidator, ], 
-        unique=True
+        validators=[UnicodeUsernameValidator(), ], 
+        unique=True,
     )
     email = models.EmailField(
         unique=True, 
@@ -33,9 +34,25 @@ class User(AbstractUser):
     genre = models.CharField(max_length=1, choices=GENRE, null=True, blank=True)
     photo = models.ImageField(upload_to='photos_users/', null=True, blank=True)
     telephone = models.CharField(max_length=15, unique=True, null=True, blank=True)
+    user_type = models.IntegerField(choices=USER_TYPE, default=7)
     
+    class Meta:
+        verbose_name = "Utilisateurs"
     
 
     def __str__(self):
         return f"{self.username} ({self.prenom} {self.postnom})"
+    
+    def generate_username(self):
+        """
+        Generate a unique username based on the user's first and last name.
+        """
+        base_username = f"{self.nom.lower()}_{self.postnom.lower()}"
+        while True:
+            username = f"{base_username}{random.randint(1000, 9999)}"
+            if not User.objects.filter(username=username).exists():
+                self.username = username
+                break
+        
+        
     

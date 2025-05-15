@@ -38,13 +38,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'App_Inscription.apps.AppInscriptionConfig',  # Your app name here
+   
     'app_Directeur.apps.AppDirecteurConfig',  # Your app name here
     'app_Paiement.apps.AppPaiementConfig',  # Your app name here
     'app_Enseignant.apps.AppEnseignantConfig', # Your app name here
-    'app_Comptable.apps.AppComptableConfig'  # Your app name here
+    'app_Comptable.apps.AppComptableConfig',  # Your app name here
     'app_Eleve.apps.AppEleveConfig',  # Your app name here
-]
+    'App_Inscription.apps.AppInscriptionConfig',
+    'app_User.apps.AppUserConfig',
+    'app_Secretaire.apps.AppSecretaireConfig',  # Your app name here
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -105,6 +108,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'app_User.User'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
